@@ -26,6 +26,9 @@ module RecurringSelectHelper
   module FormOptionsHelper
     def recurring_options_for_select(currently_selected_rule = nil, default_schedules = nil, options = {})
 
+      # If 'not recurring' was selected on the new form then 'null' comes back on the edit form, but nil is expected here
+      currently_selected_rule = nil if currently_selected_rule == 'null'
+
       options_array = []
       blank_option_label = options[:blank_label] || I18n.t("recurring_select.not_recurring")
       blank_option = [blank_option_label, "null"]
